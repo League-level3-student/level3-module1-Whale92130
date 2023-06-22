@@ -1,10 +1,12 @@
 package _04_Memory_Match;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +21,7 @@ public class GameBoard extends JFrame implements ActionListener {
 	static Card secondSelectedCard = null;
 
 	// 1. Initialize TOTAL_CARDS to 2;
-	static int TOTAL_CARDS = 0;
+	static int TOTAL_CARDS = 52;
 
 	ArrayList<Card> cards;
 
@@ -50,6 +52,7 @@ public class GameBoard extends JFrame implements ActionListener {
 		// of the Card objects to the ArrayList of Cards.
 		for (int i = 0; i < TOTAL_CARDS; i++) {
 			Card card = new Card(1);
+			card.addActionListener(this);
 			cards.add(card);
 		}
 
@@ -66,22 +69,155 @@ public class GameBoard extends JFrame implements ActionListener {
 		setupGui(cards);
 		// 8. Call the startGame() method to start the game
 		startGame();
+
+		int[] rand = new int[52];
+		for (int i = 0; i < 52; i++) {
+			rand[i] = i;
+		}
+		randomizeArray(rand);
+		for (int i = 0; i < 52; i++) {
+			System.out.println(rand[i]);
+			cards.get(i).setValue(rand[i]);
+		}
 	}
 
 	// 9. Fill in the drawCards method to draw all the cards in the ArrayList.
 	// Run your code and verify 2 cards are displayed and the game works.
-		
-	public void drawCards() {
 
+	public void drawCards() {
+		int num = 5;
+		int num2 = 8;
+		int count = 0;
+		Font font = new Font("hi", 5, 30);
+		Font Sfont = new Font("h", 5, 20);
+
+		for (int i = 0; i < cards.size(); i++) {
+			cards.get(i).setText("");
+		}
+
+		for (int i = 0; i < cards.size(); i++) {
+			// 2
+			if (cards.get(i).isFaceUp() == true) {
+				if (cards.get(i).getValue() <= 4) {
+					cards.get(i).setFont(font);
+					cards.get(i).setText("2");
+				}
+
+				// 3
+
+				if (cards.get(i).getValue() >= num && cards.get(i).getValue() <= num2) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("3");
+				}
+				count++;
+				// 4
+
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("4");
+				}
+				count++;
+				// 5
+
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("5");
+				}
+				count++;
+				// 6
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("6");
+				}
+				count++;
+				//7
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("7");
+				}
+				count++;
+				//8
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("8");
+				}
+				count++;
+				//9
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("9");
+				}
+				count++;
+				//10
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("10");
+				}
+				count++;
+				//Jack
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("Jack");
+				}
+				count++;
+				//Queen
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(Sfont);
+					cards.get(i).setText("Queen");
+				}
+				count++;
+				//King
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("King");
+				}
+				count++;
+				//Ace
+				if (cards.get(i).getValue() >= num+(4*count) && cards.get(i).getValue() <= num2+(4*count)) {
+					// String r = Integer.toString(cards.get(i).getValue());
+					cards.get(i).setFont(font);
+					cards.get(i).setText("Ace");
+				}
+				count++;
+				
+			}
+		}
+		
+		
+		//logic for solve
+		
+		
+		
+		
+	}
+
+	public static int[] randomizeArray(int[] arr) {
+		Random rand = new Random();
+		for (int i = arr.length - 1; i > 0; i--) {
+			int j = rand.nextInt(i + 1);
+			int temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+		return arr;
 	}
 
 	// 10.
 	// There are 52 cards in a normal sized deck of cards (not counting
 	// jokers). There are 4 card suits, each with the numbers 2 to 10 and
 	// the Jack, Queen, King, and Ace for a total of 13.
-	
-	
-	
+
 	//
 	// Go back and modify the code to have a total of 52 cards and 4 copies
 	// of each card, meaning x4 2s, x4 3s, x4 Jacks, ... one of each suit.
