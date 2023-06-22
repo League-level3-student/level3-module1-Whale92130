@@ -26,7 +26,7 @@ public class LongChipCompetition {
 				}
 			}
 		}
-		System.out.println(lcc.theBeatles.get(ownerOfChip).getName() + "won with a staggering " + largestChip + " centimeter long chip.");
+		System.out.println(lcc.theBeatles.get(ownerOfChip).getName() + " won with a staggering " + largestChip + " centimeter long chip.");
 	}
 
 	private void initializeBeatles() {
@@ -57,7 +57,8 @@ class Beatle {
 	private void initializePlateOfChips() {
 		int numberOfChips = new Random().nextInt(100);
 		for (int i = 0; i < numberOfChips; i++) {
-			chips.add(new Chip(new Random().nextDouble() * 10));
+			chips.add(new Chip(new Random().nextDouble() * 10+0.000000000000001));
+			
 		}
 	}
 
