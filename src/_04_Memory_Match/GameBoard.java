@@ -50,12 +50,18 @@ public class GameBoard extends JFrame implements ActionListener {
 		// 3. Create TOTAL_CARDS number of objects each with a value of 1.
 		// Also, add action listeners to each Card object and then add each
 		// of the Card objects to the ArrayList of Cards.
-		for (int i = 0; i < TOTAL_CARDS; i++) {
-			Card card = new Card(1);
-			card.addActionListener(this);
-			cards.add(card);
-		}
 
+
+		for(int i = 0; i<TOTAL_CARDS; i++) {
+		
+				Card card = new Card(i);
+				card.addActionListener(this);
+				cards.add(card);
+				cards.get(i).setFaceUpIcon(Card.cardImagesPath + (i+1) + ".png");
+			}
+		
+		
+		
 		// 4. Use Collections.shuffle() method to randomize the order of
 		// the cards in the ArrayList
 		Collections.shuffle(cards);
@@ -74,144 +80,142 @@ public class GameBoard extends JFrame implements ActionListener {
 		for (int i = 0; i < 52; i++) {
 			rand[i] = i;
 		}
-		randomizeArray(rand);
-		for (int i = 0; i < 52; i++) {
-			System.out.println(rand[i]);
-			cards.get(i).setValue(rand[i]);
-		}
+		//randomizeArray(rand);
+//		for (int i = 0; i < 52; i++) {
+//			System.out.println(rand[i]);
+//			cards.get(i).setValue(rand[i]);
+//		}
 	}
 
 	// 9. Fill in the drawCards method to draw all the cards in the ArrayList.
 	// Run your code and verify 2 cards are displayed and the game works.
 
 	public void drawCards() {
-		int num = 5;
-		int num2 = 8;
-		int count = 0;
-		int faceUp=0;
+
 		Font font = new Font("hi", 5, 30);
 		Font Sfont = new Font("h", 5, 20);
-
-		
-		
 		
 			for (int i = 0; i < cards.size(); i++) {
-				cards.get(i).setText("");
+				cards.get(i).setText(null);
 			}
+		
+		
 		
 
 		for (int i = 0; i < cards.size(); i++) {
+			cards.get(i).draw();
+		/*	
 			// 2
 			if (cards.get(i).isFaceUp() == true) {
-				if (cards.get(i).getValue() <= 4) {
+				if (cards.get(i).getValue() == 2) {
 					cards.get(i).setFont(font);
 					cards.get(i).setText("2");
-					cards.get(1).setValue(2);
+					cards.get(i).draw();
+					// cards.get(i).setValue(2);
+;
 				}
-
+			
+				
 				// 3
 
-				if (cards.get(i).getValue() >= num && cards.get(i).getValue() <= num2) {
+				if (cards.get(i).getValue() ==3) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("3");
-					cards.get(1).setValue(3);
+					// cards.get(i).setValue(3);
+
 				}
-				count++;
+
 				// 4
 
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==4) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("4");
-					cards.get(1).setValue(4);
+					// cards.get(i).setValue(4);
+
 				}
-				count++;
+
 				// 5
 
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==5) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("5");
-					cards.get(1).setValue(5);
+					// cards.get(i).setValue(5);
+
 				}
-				count++;
 				// 6
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==6) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("6");
-					cards.get(1).setValue(6);
+					// cards.get(i).setValue(6);
 				}
-				count++;
 				// 7
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==7) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("7");
-					cards.get(1).setValue(7);
+					// cards.get(i).setValue(7);
 				}
-				count++;
 				// 8
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==8) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("8");
-					cards.get(1).setValue(8);
+					// cards.get(1).setValue(8);
 				}
-				count++;
 				// 9
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue()==9) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("9");
-					cards.get(1).setValue(9);
+					// cards.get(i).setValue(2);
+
 				}
-				count++;
+
 				// 10
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==  10) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("10");
-					cards.get(1).setValue(10);
+					/// .get(i).setValue(2);
+
 				}
-				count++;
+
 				// Jack
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==11) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("Jack");
-					cards.get(1).setValue(11);
+	
 				}
-				count++;
 				// Queen
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==12) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(Sfont);
 					cards.get(i).setText("Queen");
-					cards.get(1).setValue(12);
+					// cards.get(i).setValue(12);
 				}
-				count++;
 				// King
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue()==13) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("King");
-					cards.get(1).setValue(13);
+					// cards.get(i).setValue(13);
 				}
-				count++;
 				// Ace
-				if (cards.get(i).getValue() >= num + (4 * count) && cards.get(i).getValue() <= num2 + (4 * count)) {
+				if (cards.get(i).getValue() ==1) {
 					// String r = Integer.toString(cards.get(i).getValue());
 					cards.get(i).setFont(font);
 					cards.get(i).setText("Ace");
-					cards.get(1).setValue(1);
+					// cards.get(i).setValue(1);
 				}
-				count++;
-
+			
 			}
+			*/
 		}
-
 	}
 
 	public static int[] randomizeArray(int[] arr) {
