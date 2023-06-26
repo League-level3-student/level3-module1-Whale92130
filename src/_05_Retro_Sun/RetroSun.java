@@ -1,6 +1,7 @@
 package _05_Retro_Sun;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import processing.core.PApplet;
 
@@ -18,6 +19,7 @@ public class RetroSun extends PApplet {
 	float h;
 	float x;
 	float w;
+	ArrayList<Rectangle> rects;
 
 	// RGB colors
 	int[] sunColors = { color(212, 202, 11), color(214, 198, 30), color(211, 170, 26), color(216, 157, 51),
@@ -34,12 +36,19 @@ public class RetroSun extends PApplet {
 
 	@Override
 	public void setup() {
+		
 		// 2. Set bgColor as the background color
 		background(bgColor);
 		y = width / 2;
 		h = 40;
 		x = 300 - 225;
 		w = 2 * 450;
+		
+		rects = new ArrayList<Rectangle>();
+		for (int i = 0; i <7; i++) {
+			Rectangle rect = new Rectangle(x,y+i*100,w,h);
+			rects.add(rect);
+		}
 	}
 
 	@Override
@@ -115,7 +124,6 @@ public class RetroSun extends PApplet {
 
 		fill(bgColor);
 
-		rect(x, y, w, h);
 		// To draw each rectangle we need to find its x, y, width, height
 		// *The y position can be any value within the sun:
 		// float y = width / 2;
@@ -140,12 +148,25 @@ public class RetroSun extends PApplet {
 		// draw function AND initialize it in the setup() function.
 		
 		// Do you see the rectangle moving upwards?
-		if (y < 300) {
-			y = 600;
+		
+	
+
+		for(int i= 0; i < rects.size(); i++) {
+			rect(rects.get(i).x, rects.get(i).y, rects.get(i).w, rects.get(i).h);
+			if (rects.get(i).y < 250) {
+				rects.get(i).y = 600;
+			}
+			else {
+				rects.get(i).y--;
+		
+			}
+			if (rects.get(i).h >= 0) {
+				rects.get(i).h=(float) (rects.get(i).h-0.16);
+			}if (rects.get(i).y>= 500) {
+				rects.get(i).h=40;
+			}
 		}
-		else {
-			y--;
-		}
+		
 		// Pick a y positon to be the location when the sections stop moving up.
 		// If the rectangle's y positon is above this, move the rectangle's
 		// y position back to the bottom of the sun.
