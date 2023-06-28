@@ -2,7 +2,10 @@ package _08_California_Weather;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -41,8 +44,8 @@ public class CaliforniaWeather implements ActionListener {
 	JButton button1 = new JButton();
 	JButton button2 = new JButton();
 	JButton button3 = new JButton();
-	JButton button4 = new JButton();
 	HashMap<String, WeatherData> weatherData = Utilities.getWeatherData();
+	
 
 	void start() {
 
@@ -53,13 +56,10 @@ public class CaliforniaWeather implements ActionListener {
 		button2.addActionListener(this);
 		panel.add(button3);
 		button3.addActionListener(this);
-		panel.add(button4);
-		button4.addActionListener(this);
 
 		button1.setText("Search by City");
 		button2.setText("Search by Current Conditions");
-		button3.setText("Search by Max Temperature");
-		button4.setText("Search by Minimum Temperature");
+		button3.setText("Search by Temperature");
 
 		frame.pack();
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
@@ -87,24 +87,64 @@ public class CaliforniaWeather implements ActionListener {
 
 		// button 2
 		if (arg0.getSource().equals(button2)) {
+
 			String conditions = JOptionPane.showInputDialog("Type Current City Conditions");
-			WeatherData datum = weatherData.get(conditions);
-			System.out.println(datum);
-			if (datum == null) {
-				JOptionPane.showMessageDialog(null, "Unable to find city data for: " + conditions);
+			ArrayList<String> cities = new ArrayList<String>();
+			WeatherData datum;
+
+			for (Map.Entry<String, WeatherData> entry : weatherData.entrySet()) {
+				String key = entry.getKey();
+				cities.add(key);
+			}
+
+			String listCity = "";
+			for (int i = 0; i < cities.size(); i++) {
+				datum = weatherData.get(cities.get(i));
+				if (datum.weatherSummary.equals(conditions)) {
+					listCity = listCity + cities.get(i) + ", ";
+					if (i % 5 == 2) {
+						listCity = listCity + "\n";
+					}
+				}
+			}
+			if (listCity.equals("")) {
+				JOptionPane.showMessageDialog(null, "Could not find information for: " + conditions);
 			} else {
-				JOptionPane.showMessageDialog(null, datum);
+				JOptionPane.showMessageDialog(null, listCity);
+				System.out.println("worked");
 			}
 		}
 
 		// button 3
 		if (arg0.getSource().equals(button3)) {
+			String minTempS = JOptionPane.showInputDialog("Type minimum temperature");
+			String maxTempS = JOptionPane.showInputDialog("Type maximum temperature");
+			double minTemp = Double.parseDouble(minTempS);
+			double maxTemp = Double.parseDouble(maxTempS);
+			ArrayList<String> cities = new ArrayList<String>();
+			WeatherData datum;
 
-		}
-
-		// button 4
-		if (arg0.getSource().equals(button4)) {
-
+			for (Map.Entry<String, WeatherData> entry : weatherData.entrySet()) {
+				String key = entry.getKey();
+				cities.add(key);
+			}
+			
+			String listCity = "";
+			for (int i = 0; i < cities.size(); i++) {
+				datum = weatherData.get(cities.get(i));
+				if (datum.temperatureF >= minTemp && datum.temperatureF <= maxTemp) {
+					listCity = listCity + cities.get(i) + ", ";
+					if (i % 5 == 2) {
+						listCity = listCity + "\n";
+					}
+				}
+			}
+			if (listCity.equals("")) {
+				JOptionPane.showMessageDialog(null, "Could not find information for: " + minTempS + "," + maxTempS);
+			} else {
+				JOptionPane.showMessageDialog(null, listCity);
+				System.out.println("worked");
+			}
 		}
 
 	}
